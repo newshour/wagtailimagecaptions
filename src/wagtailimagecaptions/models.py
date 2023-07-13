@@ -5,7 +5,7 @@ from wagtail.images.models import Image, AbstractImage, AbstractRendition
 from wagtail.search import index
 
 
-class ExtendedImage(AbstractImage):
+class CaptionedImage(AbstractImage):
     alt = models.CharField(
         max_length=255,
         blank=True,
@@ -27,7 +27,7 @@ class ExtendedImage(AbstractImage):
 
 
 class ExtendedRendition(AbstractRendition):
-    image = models.ForeignKey(ExtendedImage, on_delete=models.CASCADE, related_name="renditions")
+    image = models.ForeignKey(CaptionedImage, on_delete=models.CASCADE, related_name="renditions")
 
     class Meta:
         unique_together = (("image", "filter_spec", "focal_point_key"),)

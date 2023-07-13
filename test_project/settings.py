@@ -145,4 +145,4 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 WAGTAILADMIN_BASE_URL = "http://localhost/"
 WAGTAIL_SITE_NAME = "Test Project"
 
-WAGTAILIMAGES_IMAGE_MODEL = "wagtailimagecaptions.ExtendedImage"
+WAGTAILIMAGES_IMAGE_MODEL = "wagtailimagecaptions.CaptionedImage"
