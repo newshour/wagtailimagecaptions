@@ -5,6 +5,8 @@ well as the extraction of IPTC image meta data.
 
 ![screenshot](https://github.com/newshour/wagtailimagecaptions/assets/14984514/278f5d01-7f2e-48a8-98fd-aaaa6c2d6b8c)
 
+## Installing
+
 ### Settings
 
 In your settings file, add `wagtailmedia` to `INSTALLED_APPS`:
@@ -22,4 +24,15 @@ You will also need to set a custom Image model in your setting files:
 ```python
 # settings.py
 WAGTAILIMAGES_IMAGE_MODEL = "wagtailimagecaptions.CaptionedImage"
+```
+
+## How to Use
+
+The custom Image model, `CaptionedImage`, adds four new fields to the Wagtail Image model: `alt`, `caption`, `credit`, `iptc_data`. When a new image is uploaded via Wagtail's media library, the app will attempt to extract any IPTC meta data found in the file and fill
+the `alt`, `caption` and `credit` fields. All IPTC meta data  extracted is also stored in `iptc_data`.
+
+Example use in a template:
+
+```python
+<img src="{{ image.url }}" alt="{{ image.alt }}"><p>{{ image.caption }}</p>
 ```
