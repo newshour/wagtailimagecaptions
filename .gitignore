@@ -1,0 +1,14 @@
+__pycache__
+
+# Folders
+dist/
+env/
+media/*
+!media/.gitkeep
+
+# Files
+.DS_Store
+.vscode
+*.log
+*.pyc
+*.sqlite3

@@ -1,0 +1,60 @@
+[project]
+name = "wagtailimagecaptions"
+authors = [{name = "Stephan Rohde", email = "srohde@newshour.org"}]
+license = {file = "LICENSE"}
+dynamic = ["version", "description"]
+classifiers = [
+  "License :: OSI Approved :: BSD License",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Framework :: Wagtail",
+  "Framework :: Wagtail :: 4",
+  "Framework :: Wagtail :: 5"
+]
+dependencies = [
+    "Django >= 4.1",
+    "wagtail >= 5.0",
+    "pillow >= 9.5.0"
+]
+
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project.urls]
+Home = "https://github.com/newshour/wagtailimagecaptions"
+
+[tool.flit.module]
+name = "wagtailimagecaptions"
+
+[tool.flit.sdist]
+exclude = [
+    "tests",
+    "docs",
+    "env",
+    "venv",
+    ".*",
+    "*.json",
+    "*.ini",
+    "*.yml",
+    "CHANGELOG.md",
+    "SPECIFICATION.md",
+    "manage.py",
+    "runtests.py",
+]
+
+[tool.black]
+line-length = 120
+target-version = ['py311']
+extend-exclude = '''
+/(
+  | .git
+  | env
+  | migrations
+  | build
+  | dist
+)/
+'''
