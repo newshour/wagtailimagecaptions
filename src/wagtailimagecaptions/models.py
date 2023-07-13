@@ -25,6 +25,12 @@ class CaptionedImage(AbstractImage):
         index.SearchField("caption", partial_match=True, boost=10),
     ]
 
+    def default_alt_text(self):
+        """ Return our stored alt value, otherwise Wagtail defaults to the title. """
+        if self.alt:
+            return self.alt
+        return super().default_alt_text
+
 
 class ExtendedRendition(AbstractRendition):
     image = models.ForeignKey(CaptionedImage, on_delete=models.CASCADE, related_name="renditions")
