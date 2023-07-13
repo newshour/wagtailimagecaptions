@@ -23,10 +23,17 @@ def parse_image_meta(sender, **kwargs):
     meta_dict = parse_iptc(instance.file)
 
     # Add the meta data to the fields.
-    if title := Truncator(meta_dict.get("headline", "")).chars(255):
-        instance.title = title.strip()
-        instance.alt = title.strip()
+    if title := meta_dict.get("headline", ""):
+        trimmed_title = Truncator(title.strip()).chars(255)
+        instance.title = trimmed_title
+        instance.alt = trimmed_title
 
-    instance.credit = Truncator(meta_dict.get("credit", "")).chars(255)
-    instance.caption = meta_dict.get("caption").strip()
+    if credit := meta_dict.get("credit", ""):
+        trimmed_credit = Truncator(credit.strip()).chars(255)
+        instance.credit = trimmed_credit
+
+    if caption := meta_dict.get("caption", ""):
+        trimmed_caption = Truncator(caption.strip()).chars(255)
+        instance.caption = trimmed_caption
+
     instance.iptc_data = meta_dict
