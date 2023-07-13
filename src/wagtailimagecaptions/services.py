@@ -70,9 +70,9 @@ def parse_iptc(image_file: ImageFile) -> dict:
     for k, v in iptc.items():
         if k == (2, 5,):
             iptc_dict["object_name"] = decode(v)
-        if k == (2, 25,):
+        elif k == (2, 25,):
             iptc_dict["keywords"] = decode(v)
-        if k == (2, 40,):
+        elif k == (2, 40,):
             iptc_dict["instructions"] = decode(v)
         elif k == (2, 80,):
             iptc_dict["byline"] = decode(v)
