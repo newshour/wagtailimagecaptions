@@ -24,9 +24,9 @@ def parse_image_meta(sender, **kwargs):
 
     # Add the meta data to the fields.
     if title := Truncator(meta_dict.get("headline", "")).chars(255):
-        instance.title = title
-        instance.alt = title
+        instance.title = title.strip()
+        instance.alt = title.strip()
 
     instance.credit = Truncator(meta_dict.get("credit", "")).chars(255)
-    instance.caption = meta_dict.get("caption")
+    instance.caption = meta_dict.get("caption").strip()
     instance.iptc_data = meta_dict
