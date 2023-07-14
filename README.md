@@ -7,9 +7,15 @@ well as the extraction of IPTC image meta data.
 
 ## Installing
 
+Install using pip:
+
+```sh
+pip install wagtailimagecaptions
+```
+
 ### Settings
 
-In your settings file, add `wagtailmedia` to `INSTALLED_APPS`:
+In your settings file, add `wagtailimagecaptions` to `INSTALLED_APPS`:
 
 ```python
 INSTALLED_APPS = [
