@@ -32,6 +32,11 @@ You will also need to set a custom Image model in your setting files:
 WAGTAILIMAGES_IMAGE_MODEL = "wagtailimagecaptions.CaptionedImage"
 ```
 
+### Migrating
+
+Heads up! If you have existing images, you will need to create a [data migration operation](https://docs.wagtail.org/en/latest/advanced_topics/images/custom_image_model.html#migrating-from-the-builtin-image-model) to move the old images into
+the new model.
+
 ## How to Use
 
 The custom Image model, `CaptionedImage`, adds four new fields to the Wagtail Image model: `alt`, `caption`, `credit`, `iptc_data`. When a new image is uploaded via Wagtail's media library, the app will attempt to extract any IPTC meta data found in the file and fill
