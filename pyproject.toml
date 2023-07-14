@@ -1,7 +1,8 @@
 [project]
 name = "wagtailimagecaptions"
-authors = [{name = "Stephan Rohde", email = "srohde@newshour.org"}]
+authors = [{name = "Stephan Rohde", email = "appsupport@newshour.org"}]
 license = {file = "LICENSE"}
+readme = "README.md"
 dynamic = ["version", "description"]
 classifiers = [
   "License :: OSI Approved :: BSD License",
