@@ -33,7 +33,6 @@ def parse_image_meta(sender, **kwargs):
         instance.credit = trimmed_credit
 
     if caption := meta_dict.get("caption", ""):
-        trimmed_caption = Truncator(caption.strip()).chars(255)
-        instance.caption = trimmed_caption
+        instance.caption = caption.strip()
 
     instance.iptc_data = meta_dict
