@@ -32,7 +32,7 @@ class CaptionedImage(AbstractImage):
         return super().default_alt_text
 
 
-class ExtendedRendition(AbstractRendition):
+class CaptionedRendition(AbstractRendition):
     image = models.ForeignKey(CaptionedImage, on_delete=models.CASCADE, related_name="renditions")
 
     class Meta:
