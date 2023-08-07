@@ -45,5 +45,7 @@ the `alt`, `caption` and `credit` fields. All IPTC meta data  extracted is also 
 Example use in a template:
 
 ```python
-<img src="{{ image.url }}" alt="{{ image.alt }}"><p>{{ image.caption }}</p>
+{% load wagtailcore_tags %}
+
+<img src="{{ image.url }}" alt="{{ image.alt }}">{{ image.caption|richtext }}
 ```
