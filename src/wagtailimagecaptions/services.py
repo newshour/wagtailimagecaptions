@@ -70,10 +70,24 @@ def parse_iptc(image_file: ImageFile) -> dict:
     for k, v in iptc.items():
         if k == (2, 5,):
             iptc_dict["object_name"] = decode(v)
+        elif k == (2, 7,):
+            iptc_dict["edit_status"] = decode(v)
         elif k == (2, 25,):
             iptc_dict["keywords"] = decode(v)
+        elif k == (2, 30,):
+            iptc_dict["release_date"] = decode(v)
+        elif k == (2, 35,):
+            iptc_dict["release_time"] = decode(v)
+        elif k == (2, 37,):
+            iptc_dict["expiration_date"] = decode(v)
+        elif k == (2, 38,):
+            iptc_dict["expiration_time"] = decode(v)
         elif k == (2, 40,):
             iptc_dict["instructions"] = decode(v)
+        elif k == (2, 40,):
+            iptc_dict["instructions"] = decode(v)
+        elif k == (2, 42,):
+            iptc_dict["action_advised"] = decode(v)
         elif k == (2, 80,):
             iptc_dict["byline"] = decode(v)
         elif k == (2, 85,):
@@ -90,6 +104,8 @@ def parse_iptc(image_file: ImageFile) -> dict:
             iptc_dict["headline"] = decode(v)
         elif k == (2, 110,):
             iptc_dict["credit"] = decode(v)
+        elif k == (2, 116,):
+            iptc_dict["copyright_notice"] = decode(v)
         elif k == (2, 120,):
             iptc_dict["caption"] = decode(v)
         elif k == (2, 122,):
