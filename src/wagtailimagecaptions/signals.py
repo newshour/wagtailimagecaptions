@@ -35,4 +35,16 @@ def parse_image_meta(sender, **kwargs):
     if caption := meta_dict.get("caption", ""):
         instance.caption = caption.strip()
 
+    if byline := meta_dict.get("byline", ""):
+        trimmed_byline = Truncator(byline.strip()).chars(255)
+        instance.byline = trimmed_byline
+
+    if instructions := meta_dict.get("instructions", ""):
+        trimmed_instructions = Truncator(instructions.strip()).chars(255)
+        instance.usage_terms = trimmed_instructions.strip()
+
+    if copyright_notice := meta_dict.get("copyright_notice", ""):
+        trimmed_copyright = Truncator(copyright_notice.strip()).chars(255)
+        instance.copyright_notice = trimmed_copyright
+
     instance.iptc_data = meta_dict
