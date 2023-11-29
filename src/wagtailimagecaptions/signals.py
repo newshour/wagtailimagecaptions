@@ -1,5 +1,8 @@
+import re
+
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+from django.utils.html import linebreaks
 from django.utils.text import Truncator
 from wagtail.images import get_image_model_string
 
@@ -33,7 +36,13 @@ def parse_image_meta(sender, **kwargs):
         instance.credit = trimmed_credit
 
     if caption := meta_dict.get("caption", ""):
-        instance.caption = caption.strip()
+        # Wrap plain-text in <p> tags for RichTextField values.
+        starts_with_tag = bool(re.search("^<[p|div].*?>", caption))
+
+        if starts_with_tag:
+            instance.caption = caption.strip()
+        else:
+            instance.caption = linebreaks(caption.strip())
 
     if byline := meta_dict.get("byline", ""):
         trimmed_byline = Truncator(byline.strip()).chars(255)
