@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="captionedimage",
             name="uuid",
-            field=models.UUIDField(db_index=True, default=uuid.uuid4, editable=False, unique=True),
+            field=models.UUIDField(db_index=True, default=uuid.uuid4, editable=False),
         ),
     ]
