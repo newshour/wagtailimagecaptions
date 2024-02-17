@@ -104,10 +104,10 @@ class CaptionedRendition(AbstractRendition):
             and settings.WAGTIALIMAGECAPTIONS_UPLOAD_TO_DATE_PATH
         ):
             now = timezone.now()
-            upload_to_path = now.strftime(settings.WAGTIALIMAGECAPTIONS_UPLOAD_TO_DATE_PATH)
+            date_path = now.strftime(settings.WAGTIALIMAGECAPTIONS_UPLOAD_TO_DATE_PATH)
             filename = self.file.field.storage.get_valid_name(filename)
 
             # Setting 'images' here to remain consistent with the Wagtail method.
-            return os.path.join("images", upload_to_path, filename)
+            return os.path.join("images", date_path, filename)
 
         return super().get_upload_to(filename)
