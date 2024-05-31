@@ -4,6 +4,7 @@ import uuid
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 from wagtail.coreutils import string_to_ascii
 from wagtail.fields import RichTextField
 from wagtail.images.models import AbstractImage, AbstractRendition, Image
@@ -53,6 +54,13 @@ class CaptionedImage(AbstractImage):
         index.SearchField("uuid"),
         index.SearchField("caption"),
     ]
+
+    class Meta(AbstractImage.Meta):
+        verbose_name = _("image")
+        verbose_name_plural = _("images")
+        permissions = [
+            ("choose_image", "Can choose image"),
+        ]
 
     def default_alt_text(self):
         """Return our stored alt value, otherwise Wagtail defaults to the title."""
