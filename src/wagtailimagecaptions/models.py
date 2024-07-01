@@ -32,7 +32,9 @@ class CaptionedImage(AbstractImage):
     usage_terms = models.CharField(
         max_length=255,
         blank=True,
-        help_text=_("Rights information and usage limitations associated with the image, including any special restrictions or instructions."),
+        help_text=_(
+            "Rights information and usage limitations associated with the image, including any special restrictions or instructions."
+        ),
     )
     copyright_notice = models.CharField(
         max_length=255,
