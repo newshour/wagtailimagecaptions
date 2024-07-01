@@ -16,28 +16,30 @@ class CaptionedImage(AbstractImage):
     alt = models.CharField(
         max_length=255,
         blank=True,
-        help_text="Set the image alt text used for accessibility.",
+        help_text=_("Set the image alt text used for accessibility."),
     )
     caption = RichTextField(features=["bold", "italic"], null=True, blank=True, help_text="Set the image caption.")
     credit = models.CharField(
         max_length=255,
         blank=True,
-        help_text="The name of the provider (e.g. AP, Getty, Reuters).",
+        help_text=_("The name of the provider (e.g. AP, Getty, Reuters)."),
     )
     byline = models.CharField(
         max_length=255,
         blank=True,
-        help_text="The name(s) of the creator(s) of the image.",
+        help_text=_("The name(s) of the creator(s) of the image."),
     )
     usage_terms = models.CharField(
         max_length=255,
         blank=True,
-        help_text="Rights information and usage limitations associated with the image, including any special restrictions or instructions.",
+        help_text=_(
+            "Rights information and usage limitations associated with the image, including any special restrictions or instructions."
+        ),
     )
     copyright_notice = models.CharField(
         max_length=255,
         blank=True,
-        help_text="Any necessary copyright notice(s).",
+        help_text=_("Any necessary copyright notice(s)."),
     )
     iptc_data = models.JSONField(null=True, blank=True)
 
