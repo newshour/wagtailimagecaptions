@@ -1,13 +1,10 @@
 import hashlib
 import logging
-
 from os.path import basename
 
+from django.core.files.images import ImageFile
 from PIL import Image as PILImage
 from PIL.IptcImagePlugin import getiptcinfo
-
-from django.core.files.images import ImageFile
-
 from wagtail.images import get_image_model
 
 logger = logging.getLogger(__name__)
