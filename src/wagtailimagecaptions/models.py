@@ -63,7 +63,8 @@ class CaptionedImage(AbstractImage):
         permissions = [
             ("choose_image", "Can choose image"),
         ]
-
+    
+    @property
     def default_alt_text(self):
         """Return our stored alt value, otherwise Wagtail defaults to the title."""
         if self.alt:
