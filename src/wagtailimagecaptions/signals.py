@@ -23,6 +23,10 @@ def parse_image_meta(sender, **kwargs):
     if instance.id is not None:
         return
 
+    # If the file is not a tif or jpeg, don't parse.
+    if not re.search(r"\.(tif|tiff|jpeg|jpg)$", instance.file.name, re.IGNORECASE):
+        return
+
     meta_dict = parse_iptc(instance.file)
 
     # Add the meta data to the fields.
