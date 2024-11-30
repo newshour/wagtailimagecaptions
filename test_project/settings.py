@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "modelcluster",
     "taggit",
     "wagtailimagecaptions",
+    "test_project.blog"
 ]
 
 MIDDLEWARE = [
