@@ -57,7 +57,11 @@ def parse_iptc(image_file: ImageFile) -> dict:
 
     def decode(v):
         if isinstance(v, bytes):
-            return bytes.decode(v)
+            try:
+                return bytes.decode(v)
+            except UnicodeDecodeError as ude:
+                image_file_name = image_file.file.name
+                logger.error("Wagtail Image Captions Error for %s: %s", image_file_name, ude)
         elif isinstance(v, list):
             return [decode(item) for item in v]
         elif isinstance(v, str):
