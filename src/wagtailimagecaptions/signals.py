@@ -48,6 +48,9 @@ def parse_image_meta(sender, **kwargs):
         else:
             instance.caption = linebreaks(caption.strip())
 
+        # Wagtail complains about <br> tags in <p> tags.
+        instance.caption = re.sub(r"<br\s*>", "<br />", instance.caption, flags=re.IGNORECASE)
+
     if byline := meta_dict.get("byline", ""):
         trimmed_byline = Truncator(byline.strip()).chars(255)
         instance.byline = trimmed_byline
