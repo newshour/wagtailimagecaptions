@@ -126,7 +126,12 @@ class CaptionedRendition(AbstractRendition):
 
     def get_upload_to(self, filename):
         """Overrides the `get_upload_to` method to include set date paths."""
-        date_path = get_upload_to_date_path(self.image.created_at)
+        created_at = None
+
+        if self.image:
+            created_at = self.image.created_at
+
+        date_path = get_upload_to_date_path(created_at)
 
         if date_path:
             filename = self.file.field.storage.get_valid_name(filename)
