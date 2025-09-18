@@ -52,9 +52,9 @@ Example use in a template:
 
 #### Adding date paths to image uploads.
 
-To add date paths to the image upload path, you can set `WAGTIALIMAGECAPTIONS_UPLOAD_TO_DATE_PATH` in your Django settings file with a valid date format.
+To add date paths to the image upload path, you can set `WAGTAILIMAGECAPTIONS_UPLOAD_TO_DATE_PATH` in your Django settings file with a valid date format.
 
 ```python
 # settings.py
-WAGTIALIMAGECAPTIONS_UPLOAD_TO_DATE_PATH = "%Y/%m"
+WAGTAILIMAGECAPTIONS_UPLOAD_TO_DATE_PATH = "%Y/%m"
 ```

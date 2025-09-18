@@ -11,6 +11,26 @@ from wagtail.images.models import AbstractImage, AbstractRendition, Image
 from wagtail.search import index
 
 
+def get_upload_to_date_path(date_obj=None) -> str:
+    """Retrieves the upload_to date path set in `WAGTAILIMAGECAPTIONS_UPLOAD_TO_DATE_PATH`."""
+    upload_to_dt = date_obj if date_obj else timezone.now()
+
+    if (
+        hasattr(settings, "WAGTAILIMAGECAPTIONS_UPLOAD_TO_DATE_PATH")
+        and settings.WAGTAILIMAGECAPTIONS_UPLOAD_TO_DATE_PATH
+    ):
+        return upload_to_dt.strftime(settings.WAGTAILIMAGECAPTIONS_UPLOAD_TO_DATE_PATH)
+
+    # Check for misspelled setting value so we don't break any projects using this setting. Fixed in 0.2.6
+    if (
+        hasattr(settings, "WAGTIALIMAGECAPTIONS_UPLOAD_TO_DATE_PATH")
+        and settings.WAGTIALIMAGECAPTIONS_UPLOAD_TO_DATE_PATH
+    ):
+        return upload_to_dt.strftime(settings.WAGTIALIMAGECAPTIONS_UPLOAD_TO_DATE_PATH)
+
+    return ""
+
+
 class CaptionedImage(AbstractImage):
     uuid = models.UUIDField(db_index=True, default=uuid.uuid4, editable=False)
     alt = models.CharField(
@@ -74,13 +94,9 @@ class CaptionedImage(AbstractImage):
     def get_upload_to(self, filename):
         """Overrides the `get_upload_to` method to include set date paths."""
         folder_name = "original_images"
+        date_path = get_upload_to_date_path(self.created_at)
 
-        if (
-            hasattr(settings, "WAGTIALIMAGECAPTIONS_UPLOAD_TO_DATE_PATH")
-            and settings.WAGTIALIMAGECAPTIONS_UPLOAD_TO_DATE_PATH
-        ):
-            now = timezone.now()
-            date_path = now.strftime(settings.WAGTIALIMAGECAPTIONS_UPLOAD_TO_DATE_PATH)
+        if date_path:
             folder_name = os.path.join(folder_name, date_path)
 
         # ...now continue with Wagtail source.
@@ -110,12 +126,14 @@ class CaptionedRendition(AbstractRendition):
 
     def get_upload_to(self, filename):
         """Overrides the `get_upload_to` method to include set date paths."""
-        if (
-            hasattr(settings, "WAGTIALIMAGECAPTIONS_UPLOAD_TO_DATE_PATH")
-            and settings.WAGTIALIMAGECAPTIONS_UPLOAD_TO_DATE_PATH
-        ):
-            now = timezone.now()
-            date_path = now.strftime(settings.WAGTIALIMAGECAPTIONS_UPLOAD_TO_DATE_PATH)
+        created_at = None
+
+        if self.image:
+            created_at = self.image.created_at
+
+        date_path = get_upload_to_date_path(created_at)
+
+        if date_path:
             filename = self.file.field.storage.get_valid_name(filename)
 
             # Setting 'images' here to remain consistent with the Wagtail method.
