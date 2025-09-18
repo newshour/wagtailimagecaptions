@@ -21,7 +21,7 @@ def get_upload_to_date_path(date_obj=None) -> str:
     ):
         return upload_to_dt.strftime(settings.WAGTAILIMAGECAPTIONS_UPLOAD_TO_DATE_PATH)
 
-    # Check for misspelled setting value so we don't break any projects using this setting. Fixed in 0.2.5
+    # Check for misspelled setting value so we don't break any projects using this setting. Fixed in 0.2.6
     if (
         hasattr(settings, "WAGTIALIMAGECAPTIONS_UPLOAD_TO_DATE_PATH")
         and settings.WAGTIALIMAGECAPTIONS_UPLOAD_TO_DATE_PATH
